@@ -83,154 +83,170 @@
 </div>
 
 <script>
+    const messages = [
+        "💖 My love...",
+        "🌹 You make my world brighter",
+        "✨ Will you be mine?",
+        "💘 I adore you"
+    ];
 
-/* ========= PERSONNALISATION ========= */
-const crushName = "ELFIN";
-const yourName = "LEO";
+    let index = 0;
 
-/* ========= PLAYLIST ========= */
-const playlist = [
-    "music/Ano Ba Talaga Tayo - The Juans.mp3",
-    "music/Bigay Ng Maykapal.mp3"
-];
+    function changeTitle() {
+        document.title = messages[index];
+        index = (index + 1) % messages.length;
+    }
 
-let currentTrack = 0;
-const music = document.getElementById("bgMusic");
-const slider = document.getElementById("volumeSlider");
-const playBtn = document.getElementById("playBtn");
+    setInterval(changeTitle, 2000);
 
-music.volume = 0.5;
-
-function loadTrack(index) {
-    music.src = playlist[index];
-}
-
-function playMusic() {
-    music.play().then(() => {
-        playBtn.innerText = "⏸";
-    }).catch(err => console.log(err));
-}
-
-function pauseMusic() {
-    music.pause();
-    playBtn.innerText = "▶";
-}
-
-function togglePlay() {
-    if (music.paused) {
+    /* ========= PERSONNALISATION ========= */
+    const crushName = "ELFIN";
+    const yourName = "LEO";
+    
+    /* ========= PLAYLIST ========= */
+    const playlist = [
+        "music/Ano Ba Talaga Tayo - The Juans.mp3",
+        "music/Bigay Ng Maykapal.mp3"
+    ];
+    
+    let currentTrack = 0;
+    const music = document.getElementById("bgMusic");
+    const slider = document.getElementById("volumeSlider");
+    const playBtn = document.getElementById("playBtn");
+    
+    music.volume = 0.5;
+    
+    function loadTrack(index) {
+        music.src = playlist[index];
+    }
+    
+    function playMusic() {
+        music.play().then(() => {
+            playBtn.innerText = "⏸";
+        }).catch(err => console.log(err));
+    }
+    
+    function pauseMusic() {
+        music.pause();
+        playBtn.innerText = "▶";
+    }
+    
+    function togglePlay() {
+        if (music.paused) {
+            playMusic();
+        } else {
+            pauseMusic();
+        }
+    }
+    
+    function nextTrack() {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        loadTrack(currentTrack);
         playMusic();
-    } else {
-        pauseMusic();
     }
-}
-
-function nextTrack() {
-    currentTrack = (currentTrack + 1) % playlist.length;
-    loadTrack(currentTrack);
-    playMusic();
-}
-
-function prevTrack() {
-    currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-    loadTrack(currentTrack);
-    playMusic();
-}
-
-music.addEventListener("ended", nextTrack);
-
-slider.addEventListener("input", () => {
-    music.volume = slider.value;
-});
-
-/* ========= LANGUAGES ========= */
-
-const translations = {
-    fr: {
-        openBtn: "Ouvrir mon cœur 💌",
-        homeBtn: "Accueil",
-        photoBtn: "Photo",
-        photoText: "Un souvenir que je veux garder pour toujours 🤍",
-        title: "Joyeuse Saint-Valentin",
-        subtitle: crushName + " ❤️",
-        line1: "Depuis que tu es entrée dans ma vie, tout brille différemment.",
-        line2: "Nos moments ensemble sont devenus mes souvenirs préférés.",
-        line3: "Ce n’est pas une promesse… juste quelque chose de sincère.",
-        line4: "Alors aujourd’hui, je veux te poser une question importante… accepterais-tu qu’on devienne plus que des amis ? 🤍",
-        signature: "Avec tout mon cœur,\n" + yourName
-    },
-    en: {
-        openBtn: "Open my heart 💌",
-        homeBtn: "Home",
-        photoBtn: "Photo",
-        photoText: "A memory I want to keep forever 🤍",
-        title: "Happy Valentine's Day",
-        subtitle: crushName + " ❤️",
-        line1: "Since you came into my life, everything shines differently.",
-        line2: "Our moments together became my favorite memories.",
-        line3: "Not a promise… just something real.",
-        line4: "So today, I want to ask you something important… would you like us to become more than just friends? 🤍",
-        signature: "With all my heart,\n" + yourName
-    },
-    fil: {
-        openBtn: "Buksan ang puso ko 💌",
-        homeBtn: "Tahanan",
-        photoBtn: "Larawan",
-        photoText: "Isang alaala na gusto kong panghawakan habang buhay 🤍",
-        title: "Maligayang Araw ng mga Puso",
-        subtitle: crushName + " ❤️",
-        line1: "Simula nang dumating ka, mas naging maliwanag ang mundo ko.",
-        line2: "Ang mga sandali natin ang paborito kong alaala.",
-        line3: "Hindi pangako… kundi totoo.",
-        line4: "Kaya ngayon, may isa akong tanong… papayag ka bang maging higit pa tayo sa magkaibigan? 🤍",
-        signature: "Buong puso,\n" + yourName
+    
+    function prevTrack() {
+        currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrack);
+        playMusic();
     }
-};
-
-function setLang(lang) {
-    const t = translations[lang];
-    for (let key in t) {
-        document.getElementById(key).innerText = t[key];
+    
+    music.addEventListener("ended", nextTrack);
+    
+    slider.addEventListener("input", () => {
+        music.volume = slider.value;
+    });
+    
+    /* ========= LANGUAGES ========= */
+    
+    const translations = {
+        fr: {
+            openBtn: "Ouvrir mon cœur 💌",
+            homeBtn: "Accueil",
+            photoBtn: "Photo",
+            photoText: "Un souvenir que je veux garder pour toujours 🤍",
+            title: "Joyeuse Saint-Valentin",
+            subtitle: crushName + " ❤️",
+            line1: "Depuis que tu es entrée dans ma vie, tout brille différemment.",
+            line2: "Nos moments ensemble sont devenus mes souvenirs préférés.",
+            line3: "Ce n’est pas une promesse… juste quelque chose de sincère.",
+            line4: "Alors aujourd’hui, je veux te poser une question importante… accepterais-tu qu’on devienne plus que des amis ? 🤍",
+            signature: "Avec tout mon cœur,\n" + yourName
+        },
+        en: {
+            openBtn: "Open my heart 💌",
+            homeBtn: "Home",
+            photoBtn: "Photo",
+            photoText: "A memory I want to keep forever 🤍",
+            title: "Happy Valentine's Day",
+            subtitle: crushName + " ❤️",
+            line1: "Since you came into my life, everything shines differently.",
+            line2: "Our moments together became my favorite memories.",
+            line3: "Not a promise… just something real.",
+            line4: "So today, I want to ask you something important… would you like us to become more than just friends? 🤍",
+            signature: "With all my heart,\n" + yourName
+        },
+        fil: {
+            openBtn: "Buksan ang puso ko 💌",
+            homeBtn: "Tahanan",
+            photoBtn: "Larawan",
+            photoText: "Isang alaala na gusto kong panghawakan habang buhay 🤍",
+            title: "Maligayang Araw ng mga Puso",
+            subtitle: crushName + " ❤️",
+            line1: "Simula nang dumating ka, mas naging maliwanag ang mundo ko.",
+            line2: "Ang mga sandali natin ang paborito kong alaala.",
+            line3: "Hindi pangako… kundi totoo.",
+            line4: "Kaya ngayon, may isa akong tanong… papayag ka bang maging higit pa tayo sa magkaibigan? 🤍",
+            signature: "Buong puso,\n" + yourName
+        }
+    };
+    
+    function setLang(lang) {
+        const t = translations[lang];
+        for (let key in t) {
+            document.getElementById(key).innerText = t[key];
+        }
     }
-}
-
-function detectLang() {
-    const l = navigator.language;
-    if (l.startsWith("fr")) return "fr";
-    if (l.startsWith("tl") || l.startsWith("fil")) return "fil";
-    return "en";
-}
-
-setLang(detectLang());
-
-/* ========= LETTER OPEN ========= */
-
-function openLetter() {
-    document.getElementById("letter").classList.add("open");
-    document.getElementById("content").classList.remove("hidden");
-
-    loadTrack(currentTrack);
-    playMusic();
-}
-
-/* ========= SECTION SWITCH ========= */
-
-function showSection(id) {
-    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
-}
-
-/* ========= HEART RAIN ========= */
-
-setInterval(() => {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.animationDuration = 3 + Math.random() * 5 + "s";
-    document.querySelector(".hearts").appendChild(h);
-    setTimeout(() => h.remove(), 8000);
-}, 250);
+    
+    function detectLang() {
+        const l = navigator.language;
+        if (l.startsWith("fr")) return "fr";
+        if (l.startsWith("tl") || l.startsWith("fil")) return "fil";
+        return "en";
+    }
+    
+    setLang(detectLang());
+    
+    /* ========= LETTER OPEN ========= */
+    
+    function openLetter() {
+        document.getElementById("letter").classList.add("open");
+        document.getElementById("content").classList.remove("hidden");
+    
+        loadTrack(currentTrack);
+        playMusic();
+    }
+    
+    /* ========= SECTION SWITCH ========= */
+    
+    function showSection(id) {
+        document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+    }
+    
+    /* ========= HEART RAIN ========= */
+    
+    setInterval(() => {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.animationDuration = 3 + Math.random() * 5 + "s";
+        document.querySelector(".hearts").appendChild(h);
+        setTimeout(() => h.remove(), 8000);
+    }, 250);
 
 </script>
 
 </body>
 </html>
+
