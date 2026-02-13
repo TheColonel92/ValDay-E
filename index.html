@@ -67,12 +67,12 @@
     <!-- PHOTO SECTION -->
     <section id="photo" class="section">
         <img 
-            src="images/Screenshot_2026-01-11-01-31-14-30_572064f74bd5f9fa804b05334aa4f912.jpg" 
+            src="images/bbt-c6-01112026.jpg" 
             alt="Memory"
             style="width: 220px; max-width: 45%; height: auto; border-radius: 15px; margin: 10px;"
         >
         <img 
-            src="images/Screenshot_2026-02-11-17-38-49-03_572064f74bd5f9fa804b05334aa4f912.jpg" 
+            src="images/bbt-c6-02112026.jpg" 
             alt="Memory"
             style="width: 220px; max-width: 45%; height: auto; border-radius: 15px; margin: 10px;"
         >
@@ -102,35 +102,35 @@
     /* ========= PERSONNALISATION ========= */
     const crushName = "ELFIN";
     const yourName = "LEO";
-    
+
     /* ========= PLAYLIST ========= */
     const playlist = [
         "music/Ano Ba Talaga Tayo - The Juans.mp3",
         "music/Bigay Ng Maykapal.mp3"
     ];
-    
+
     let currentTrack = 0;
     const music = document.getElementById("bgMusic");
     const slider = document.getElementById("volumeSlider");
     const playBtn = document.getElementById("playBtn");
-    
+
     music.volume = 0.5;
-    
+
     function loadTrack(index) {
         music.src = playlist[index];
     }
-    
+
     function playMusic() {
         music.play().then(() => {
             playBtn.innerText = "⏸";
         }).catch(err => console.log(err));
     }
-    
+
     function pauseMusic() {
         music.pause();
         playBtn.innerText = "▶";
     }
-    
+
     function togglePlay() {
         if (music.paused) {
             playMusic();
@@ -138,27 +138,27 @@
             pauseMusic();
         }
     }
-    
+
     function nextTrack() {
         currentTrack = (currentTrack + 1) % playlist.length;
         loadTrack(currentTrack);
         playMusic();
     }
-    
+
     function prevTrack() {
         currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
         loadTrack(currentTrack);
         playMusic();
     }
-    
+
     music.addEventListener("ended", nextTrack);
-    
+
     slider.addEventListener("input", () => {
         music.volume = slider.value;
     });
-    
+
     /* ========= LANGUAGES ========= */
-    
+
     const translations = {
         fr: {
             openBtn: "Ouvrir mon cœur 💌",
@@ -200,42 +200,42 @@
             signature: "Buong puso,\n" + yourName
         }
     };
-    
+
     function setLang(lang) {
         const t = translations[lang];
         for (let key in t) {
             document.getElementById(key).innerText = t[key];
         }
     }
-    
+
     function detectLang() {
         const l = navigator.language;
         if (l.startsWith("fr")) return "fr";
         if (l.startsWith("tl") || l.startsWith("fil")) return "fil";
         return "en";
     }
-    
+
     setLang(detectLang());
-    
+
     /* ========= LETTER OPEN ========= */
-    
+
     function openLetter() {
         document.getElementById("letter").classList.add("open");
         document.getElementById("content").classList.remove("hidden");
-    
+
         loadTrack(currentTrack);
         playMusic();
     }
-    
+
     /* ========= SECTION SWITCH ========= */
-    
+
     function showSection(id) {
         document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
         document.getElementById(id).classList.add("active");
     }
-    
+
     /* ========= HEART RAIN ========= */
-    
+
     setInterval(() => {
         const h = document.createElement("div");
         h.className = "heart";
@@ -249,4 +249,3 @@
 
 </body>
 </html>
-
